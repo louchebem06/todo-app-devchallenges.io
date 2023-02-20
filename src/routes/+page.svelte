@@ -3,6 +3,7 @@
 	import Panel from "$lib/Panel.svelte";
 	import type { Element } from "$lib/Element";
   	import Todo from "$lib/Todo.svelte";
+  import { element } from "svelte/internal";
 
 	let panel: string = "all";
 	let inputText: string = "";
@@ -14,6 +15,14 @@
 		elements.push({id: elements.length, value: inputText, active: false});
 		inputText = "";
 		elements = elements.slice();
+	}
+
+	function removeElement(id: number) {
+		elements = elements.filter(element => element.id != id);
+	}
+
+	function removeAll() {
+		elements = [];
 	}
 </script>
 
@@ -32,13 +41,26 @@
 	{/if}
 
 	<div class="todos">
-	{#each elements as element}
-		{#if panel == 'all'
-			|| (panel == 'active' && !element.active)
-			|| (panel == 'completed' && element.active)}
-		<Todo bind:element={element} />
+		{#each elements as element}
+			{#if panel == 'all'
+				|| (panel == 'active' && !element.active)
+				|| (panel == 'completed' && element.active)}
+			<Todo
+				bind:element={element}
+				bind:panel={panel}
+				rmFn={removeElement}/>
+			{/if}
+		{/each}
+		{#if panel == 'completed'}
+		<div class="buttonDelete">
+			<button on:click={removeAll}>
+				<span class="material-symbols-outlined">
+					delete
+				</span>
+				delete all
+			</button>
+		</div>
 		{/if}
-	{/each}
 	</div>
 
 </div>
@@ -66,5 +88,27 @@
 		flex-direction: column;
 		gap: 27px;
 		width: 100%;
+	}
+
+	.buttonDelete {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	.todos button {
+		font-weight: 600;
+		font-size: 12px;
+		line-height: 15px;
+		color: #FFFFFF;
+		background: #EB5757;
+		border-radius: 4px;
+		border: none;
+		width: 124px;
+		height: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 5.5px;
+		cursor: pointer;
 	}
 </style>

@@ -2,6 +2,8 @@
 	import type { Element } from "./Element";
 
 	export let element: Element;
+	export let panel: string;
+	export let rmFn: any;
 
 	let checkbox: any;
 
@@ -21,9 +23,12 @@
 		<p class:checked={element.active}>{element.value}</p>
 	</div>
 
-	<span class="material-symbols-outlined">
-		delete
-	</span>
+	{#if panel == "completed"}
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<span on:click={rmFn(element.id)} class="material-symbols-outlined">
+			delete
+		</span>
+	{/if}
 </div>
 
 <style>
@@ -31,6 +36,11 @@
 		display: flex;
 		justify-content: space-between;
 		color: #BDBDBD;
+	}
+
+	.mainTodo span.material-symbols-outlined {
+		cursor: pointer;
+		user-select: none;
 	}
 
 	.todo {
