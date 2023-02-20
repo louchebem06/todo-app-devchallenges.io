@@ -17,5 +17,6 @@
 		gap: 25px;
 		width: 100%;
 		align-items: center;
+		margin-bottom: 33px;
 	}
 </style>

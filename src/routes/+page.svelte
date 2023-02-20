@@ -31,6 +31,7 @@
 		<Bar fn={addElement} bind:value={inputText}/>
 	{/if}
 
+	<div class="todos">
 	{#each elements as element}
 		{#if panel == 'all'
 			|| (panel == 'active' && !element.active)
@@ -38,6 +39,7 @@
 		<Todo bind:element={element} />
 		{/if}
 	{/each}
+	</div>
 
 </div>
 
@@ -57,5 +59,12 @@
 		font-size: 36px;
 		line-height: 42px;
 		letter-spacing: -0.045em;
+	}
+
+	.todos {
+		display: flex;
+		flex-direction: column;
+		gap: 27px;
+		width: 100%;
 	}
 </style>
