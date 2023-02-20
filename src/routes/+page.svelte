@@ -65,6 +65,10 @@
 
 </div>
 
+<div class="signature">
+	<p>created by <a href="https://github.com/louchebem06">louchebem06</a> - devChallenges.io</p>
+</div>
+
 <style>
 	.content {
 		display: flex;
@@ -110,5 +114,25 @@
 		justify-content: center;
 		gap: 5.5px;
 		cursor: pointer;
+	}
+
+	.signature {
+		position: absolute;
+		bottom: 24px;
+		left: 0;
+		text-align: center;
+		width: 100%;
+	}
+
+	.signature p, .signature a{
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 17px;
+		text-align: center;
+		color: #A9A9A9;
+	}
+
+	.signature a {
+		font-weight: 700;
 	}
 </style>
