@@ -2,7 +2,7 @@
 	import Bar from "$lib/Bar.svelte";
 	import Panel from "$lib/Panel.svelte";
 	import type { Element } from "$lib/Element";
-  import { element } from "svelte/internal";
+  	import Todo from "$lib/Todo.svelte";
 
 	let panel: string = "all";
 	let inputText: string = "";
@@ -11,7 +11,7 @@
 	function addElement() {
 		if (inputText == "")
 			return ;
-		elements.push({value: inputText, active: false});
+		elements.push({id: elements.length, value: inputText, active: false});
 		inputText = "";
 		elements = elements.slice();
 	}
@@ -35,7 +35,7 @@
 		{#if panel == 'all'
 			|| (panel == 'active' && !element.active)
 			|| (panel == 'completed' && element.active)}
-		<p>{element.value}</p>
+		<Todo bind:element={element} />
 		{/if}
 	{/each}
 
